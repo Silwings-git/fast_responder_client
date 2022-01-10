@@ -8,6 +8,7 @@
 <script>
     import SHeader from "@/components/SHeader.vue";
 
+
     export default {
         components: {
             SHeader: SHeader,
@@ -36,6 +37,6 @@
     }
 
     #routerView{
-        height: 90vh;
+        height: 800px;
     }
 </style>
