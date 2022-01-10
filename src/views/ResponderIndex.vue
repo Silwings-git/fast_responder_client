@@ -120,6 +120,7 @@
         >
         </el-pagination>
       </div>
+      <router-view></router-view>
     </div>
   </el-container>
 </template>
@@ -130,7 +131,7 @@ import { host } from "@/request/config";
 import { formatDate } from "@/js/date.js";
 
 export default {
-  name: "RequestConfigInfo",
+  name: "ResponderInfo",
   data() {
     return {
       search: {
@@ -177,7 +178,6 @@ export default {
   methods: {
     query() {
       var that = this;
-      console.log(that.search);
       axios
         .post(host() + "/responder/request/crud/query", that.search)
         .then((res) => {
@@ -192,13 +192,16 @@ export default {
     },
     handleCurrentChange(pageNum) {
       this.search.pageNum = pageNum;
-      console.log(this.search);
       this.query();
     },
     formatDate(date) {
-     console.log(date)
       return formatDate(date, "yyyy-MM-dd hh:mm:ss");
     },
+    handleClick(row){
+      // row就是集合内的对象
+      console.log(row)
+      this.$router.push(`/responder/detail/${row.id}`)
+    }
   },
   mounted: function () {
     this.query();
@@ -213,7 +216,7 @@ export default {
 }
 
 .input {
-  padding: 10px 20px 10px 5px;
+  padding: 45px 20px 10px 5px;
 }
 
 .tableDiv {

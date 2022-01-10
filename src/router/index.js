@@ -1,43 +1,49 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-//import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
-    path: "/",
-    name: "Home",
-    redirect:'/jsonTools'
-  },
+const routes = [{
+        path: "/",
+        name: "Home",
+        redirect: '/jsonTools'
+    },
 
-  {
-    path: "/crypto",
-    name: "Crypto",
-    component: () =>
-      import(/* webpackChunkName: "crypto" */ "../views/Crypto.vue"),
-  },
-  {
-    path: "/annotation",
-    name: "Annotation",
-    component: () =>
-      import(/* webpackChunkName: "annotation" */ "../views/Annotation.vue"),
-  },
-  {
-    path: "/jsonTools",
-    name: "JsonTools",
-    component: () =>
-      import(/* webpackChunkName: "jsontools" */ "../views/JsonTools.vue"),
-  },
-  {
-    path: "/requestConfig/index",
-    name: "RequestConfigIndex",
-    component: () => import("../views/RequestConfigIndex.vue"),
-  },
+    {
+        path: "/crypto",
+        name: "Crypto",
+        component: () =>
+            import ( /* webpackChunkName: "crypto" */ "../views/Crypto.vue"),
+    },
+    {
+        path: "/annotation",
+        name: "Annotation",
+        component: () =>
+            import ( /* webpackChunkName: "annotation" */ "../views/Annotation.vue"),
+    },
+    {
+        path: "/jsonTools",
+        name: "JsonTools",
+        component: () =>
+            import ( /* webpackChunkName: "jsontools" */ "../views/JsonTools.vue"),
+    },
+    {
+        path: "/responder/index",
+        name: "ResponderIndex",
+        component: () =>
+            import ("../views/ResponderIndex.vue"),
+    },
+    {
+        path: "/responder/detail/:id",
+        name: "ResponderDetail",
+        component: () =>
+            import ("../views/ResponderDetail.vue"),
+    },
+
 ];
 
 const router = new VueRouter({
-  routes,
+    routes,
 });
 
 export default router;

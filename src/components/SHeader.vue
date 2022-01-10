@@ -19,8 +19,8 @@
     <el-menu-item index="3" :route="{ name: 'Annotation' }"
       >实体类转换</el-menu-item
     >
-    <el-menu-item index="4" :route="{ name: 'RequestConfigIndex' }"
-      >配置列表</el-menu-item
+    <el-menu-item index="4" :route="{ name: 'ResponderIndex' }"
+      >应答器</el-menu-item
     >
   </el-menu>
 </template>
