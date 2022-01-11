@@ -215,12 +215,14 @@ export default {
   width: 1600px;
 }
 
-.input {
-  padding: 45px 20px 10px 5px;
-}
+
 
 .tableDiv {
   padding: 0px 20px;
+}
+
+    .input {
+  padding: 45px 20px 10px 5px;
 }
 
 </style>
@@ -234,5 +236,7 @@ export default {
       top: 50%;
       margin-top: -4px;
     }
+
+
 
 </style>
