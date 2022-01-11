@@ -222,4 +222,17 @@ export default {
 .tableDiv {
   padding: 0px 20px;
 }
+
+</style>
+<style>
+
+.el-input__suffix {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      right: 33px;
+      top: 50%;
+      margin-top: -4px;
+    }
+
 </style>
