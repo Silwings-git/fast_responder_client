@@ -94,16 +94,17 @@
           <el-table-column
             prop="updateTime"
             label="最后更新时间"
-            :formatter="({updateTime})=>`${formatDate(new Date(updateTime))}`"
+            :formatter="
+              ({ updateTime }) => `${formatDate(new Date(updateTime))}`
+            "
             min-width="150"
           >
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
-              <el-button @click="handleClick(scope.row)" type="text"
+              <el-button @click="viewDetails(scope.row)" type="text"
                 >查看</el-button
               >
-              <el-button type="text">编辑</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -197,11 +198,9 @@ export default {
     formatDate(date) {
       return formatDate(date, "yyyy-MM-dd hh:mm:ss");
     },
-    handleClick(row){
-      // row就是集合内的对象
-      console.log(row)
-      this.$router.push(`/responder/detail/${row.id}`)
-    }
+    viewDetails(row) {
+      this.$router.push(`/responder/detail/${row.id}`);
+    },
   },
   mounted: function () {
     this.query();
@@ -215,28 +214,21 @@ export default {
   width: 1600px;
 }
 
-
-
 .tableDiv {
   padding: 0px 20px;
 }
 
-    .input {
+.input {
   padding: 45px 20px 10px 5px;
 }
-
 </style>
 <style>
-
 .el-input__suffix {
-      position: absolute;
-      width: 12px;
-      height: 12px;
-      right: 33px;
-      top: 50%;
-      margin-top: -4px;
-    }
-
-
-
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  right: 33px;
+  top: 50%;
+  margin-top: -4px;
+}
 </style>

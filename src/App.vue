@@ -1,5 +1,5 @@
 <template>
-    <div id="app" class="grid">
+    <div id="app" class="grid" style="background-size:100%;background: rgb(242, 243, 245)">
         <SHeader/>
         <router-view id="routerView"/>
     </div>
@@ -7,7 +7,6 @@
 
 <script>
     import SHeader from "@/components/SHeader.vue";
-
 
     export default {
         components: {
@@ -21,22 +20,15 @@
         font-family: Avenir, Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        color: #2c3e50;
     }
 
     .grid {
         width: 100%;
         min-height: 98vh;
-        background: url("https://silwings-tools.oss-cn-shanghai.aliyuncs.com/icon/001.jpg") no-repeat center top/ 100%;
+        // background: url("https://silwings-tools.oss-cn-shanghai.aliyuncs.com/icon/001.jpg") no-repeat center top/ 100%;
+        // background: rgb(242, 243, 245) ;
+        // background-size: 100%;
+        // background-repeat: repeat;
     }
 
-    input,
-    textarea {
-        width: 150px;
-        background: rgba(255, 255, 255) !important;
-    }
-
-    #routerView{
-        height: 800px;
-    }
 </style>

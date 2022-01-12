@@ -1,146 +1,259 @@
 <template>
   <div>
-    <div>
-      <h1>基础信息</h1>
-      应答器名<el-input
-        v-model="responderInfo.name"
-        placeholder="请输入"
-        style="width: 200px"
-        class="input"
-        :disabled="canEdit"
-      ></el-input>
-      分类名称<el-input
-        v-model="responderInfo.categoryName"
-        placeholder="请输入"
-        style="width: 200px"
-        class="input"
-        :disabled="canEdit"
-      ></el-input>
-      应答地址<el-input
-        v-model="responderInfo.keyUrl"
-        placeholder="请输入"
-        style="width: 200px"
-        class="input"
-        :disabled="canEdit"
-      ></el-input>
-    </div>
-    <div>
-      请求方式
-      <el-select
-        v-model="responderInfo.httpMethod"
-        class="input"
-        clearable
-        placeholder="请选择"
-        style="width: 200px"
-        :disabled="canEdit"
-      >
-        <el-option
-          v-for="item in optionalHttpMethods"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        >
-        </el-option>
-      </el-select>
-      启用状态
-      <el-select
-        v-model="enableStatus"
-        class="input"
-        clearable
-        placeholder="请选择"
-        style="width: 200px"
-        :disabled="canEdit"
-        ><el-option
-          v-for="item in optionalEnableStatuss"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        >
-        </el-option>
-      </el-select>
-    </div>
-    <div>
-      <div>
-        <h1>HTTP 任务信息</h1>
-        <div v-for="(task, i) in responderInfo.tasks" :key="task.name">
-          <h2>任务{{ i + 1 }}</h2>
-          <div>
+    <el-row>
+      <el-col :span="11">
+        <h1>{{ responderInfoDetail.name }}</h1>
+        <div class="infoContent">
+          <h2>基本信息</h2>
+          <hr />
+          <el-row :gutter="20">
+            <el-col :span="10"
+              ><div class="grid-content bg-purple">
+                <span>分类名称: {{ responderInfoDetail.categoryName }}</span>
+              </div></el-col
+            >
+            <el-col :span="10"
+              ><div class="grid-content bg-purple">
+                <span>应答地址: {{ responderInfoDetail.keyUrl }}</span>
+              </div></el-col
+            >
+          </el-row>
+          <br />
+          <el-row :gutter="20">
+            <el-col :span="10"
+              ><div class="grid-content bg-purple">
+                <span>请求方式: {{ responderInfoDetail.httpMethod }}</span>
+              </div></el-col
+            >
+          </el-row>
+          <br />
+        </div>
+        <div class="infoContent">
+          <h2>HTTP 任务</h2>
+          <hr />
+          <div v-for="(task, i) in responderInfoDetail.tasks" :key="i">
+            <h3>任务 {{ i + 1 }}</h3>
             <div>
-              任务名称<el-input
-                v-model="task.name"
-                placeholder="请输入"
-                style="width: 400px"
-                class="input"
-                :disabled="canEdit"
-              ></el-input>
-              延迟时间(ms)<el-input
-                v-model="task.delayTime"
-                placeholder="请输入"
-                style="width: 370px"
-                class="input"
-                :disabled="canEdit"
-              ></el-input>
+              <el-row :gutter="20">
+                <el-col :span="10"
+                  ><div class="grid-content bg-purple">
+                    <span>任务名称: {{ task.name }}</span>
+                  </div></el-col
+                >
+                <el-col :span="10"
+                  ><div class="grid-content bg-purple">
+                    <span>延迟时间: {{ task.delayTime }} ms</span>
+                  </div></el-col
+                >
+              </el-row>
             </div>
-          </div>
-          <div>
-            任务条件
-            <div v-for="(conditionItem, i) in task.conditions" :key="i">
-              <div>
-                <el-input
-                  v-model="task.conditions[i]"
-                  placeholder="请输入"
-                  style="width: 965px"
-                  :disabled="canEdit"
-                ></el-input>
+            <div>
+              <h4>执行条件</h4>
+              <div v-for="(condition, index) in task.conditions" :key="index">
+                <el-row :gutter="20">
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple">
+                      <span>条件{{ index + 1 }} : {{ condition }}</span>
+                    </div></el-col
+                  >
+                </el-row>
               </div>
             </div>
-          </div>
-          <div>
-            <br />
-            任务内容
             <div>
-              请求方式
-              <el-select
-                v-model="task.content.httpMethod"
-                class="input"
-                clearable
-                placeholder="请选择"
-                style="width: 400px"
-                :disabled="canEdit"
-              >
-                <el-option
-                  v-for="opt in optionalHttpMethods"
-                  :key="opt.value"
-                  :label="opt.label"
-                  :value="opt.value"
-                >
-                </el-option>
-              </el-select>
-              请求地址<el-input
-                v-model="task.content.requestUrl"
-                placeholder="请输入"
-                style="width: 400px"
-                class="input"
-                :disabled="canEdit"
-              ></el-input>
+              <h4>任务内容</h4>
               <div>
-                请求头
-                <el-input
-                  type="textarea"
-                  style="width: 400px"
-                  placeholder="请输入内容"
-                  v-model="task.content.headers"
+                <el-row :gutter="20">
+                  <el-col :span="10"
+                    ><div class="grid-content bg-purple">
+                      <span>请求方式: {{ task.content.httpMethod }}</span>
+                    </div></el-col
+                  >
+                  <el-col :span="10"
+                    ><div class="grid-content bg-purple">
+                      <span>请求地址: {{ task.content.requestUrl }} ms</span>
+                    </div></el-col
+                  >
+                </el-row>
+              </div>
+              <div>
+                <h5>请求头</h5>
+                <el-row :gutter="20">
+                  <el-col :span="6"
+                    ><div class="grid-content bg-purple">序号</div></el-col
+                  >
+                  <el-col :span="7"
+                    ><div class="grid-content bg-purple">
+                      <span>请求头Key</span>
+                    </div></el-col
+                  >
+                  <el-col :span="7"
+                    ><div class="grid-content bg-purple">
+                      <span>请求头Value</span>
+                    </div></el-col
+                  >
+                </el-row>
+                <br />
+                <div
+                  v-for="(value, key, index) in task.content.headers"
+                  :key="index"
                 >
-                </el-input>
+                  <el-row :gutter="20">
+                    <el-col :span="6"
+                      ><div class="grid-content bg-purple">
+                        <span>{{ index + 1 }}</span>
+                      </div></el-col
+                    >
+                    <el-col :span="7"
+                      ><div class="grid-content bg-purple">
+                        <span>{{ key }}</span>
+                      </div></el-col
+                    >
+                    <el-col :span="7"
+                      ><div class="grid-content bg-purple">
+                        <span>{{ value }}</span>
+                      </div></el-col
+                    >
+                  </el-row>
+                </div>
+              </div>
+              <div>
+                <h5>请求参数</h5>
+                <el-row :gutter="20">
+                  <el-col :span="6"
+                    ><div class="grid-content bg-purple">序号</div></el-col
+                  >
+                  <el-col :span="7"
+                    ><div class="grid-content bg-purple">
+                      <span>请求参数Key</span>
+                    </div></el-col
+                  >
+                  <el-col :span="7"
+                    ><div class="grid-content bg-purple">
+                      <span>请求参数Value</span>
+                    </div></el-col
+                  >
+                </el-row>
+                <br />
+                <div
+                  v-for="(value, key, index) in task.content.params"
+                  :key="index"
+                >
+                  <div v-for="(item, itemIndex) in value" :key="itemIndex">
+                    <el-row :gutter="20">
+                      <el-col :span="6"
+                        ><div class="grid-content bg-purple">
+                          {{ index + 1 }}.{{ itemIndex + 1 }}
+                        </div></el-col
+                      >
+                      <el-col :span="7"
+                        ><div class="grid-content bg-purple">
+                          <span>{{ key }}</span>
+                        </div></el-col
+                      >
+                      <el-col :span="7"
+                        ><div class="grid-content bg-purple">
+                          <span>{{ item }}</span>
+                        </div></el-col
+                      >
+                    </el-row>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h5>请求体</h5>
+                <pre>{{ task.content.body | jsonFormat }}</pre>
+                <br />
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+        <div class="infoContent">
+          <h2>响应信息</h2>
+          <hr />
+          <div
+            v-for="(result, index) in responderInfoDetail.results"
+            :key="index"
+          >
+            <h3>响应信息 {{ index + 1 }} : {{ result.resultName }}</h3>
+            <div>
+              <h4>执行条件</h4>
+              <div v-for="(condition, index) in result.conditions" :key="index">
+                <el-row :gutter="20">
+                  <el-col :span="20"
+                    ><div class="grid-content bg-purple">
+                      <span>条件{{ index + 1 }} : {{ condition }}</span>
+                    </div></el-col
+                  >
+                </el-row>
+              </div>
+            </div>
+            <br />
+            <div>
+              <el-row :gutter="20">
+                <el-col :span="10"
+                  ><div class="grid-content bg-purple">
+                    <span>字符串返回信息 : {{ result.msg }}</span>
+                  </div></el-col
+                >
+              </el-row>
+            </div>
+            <br />
+            <div>
+              <div>
+                <h5>响应体</h5>
+                <pre>{{ result.body | jsonFormat }}</pre>
+                <br />
+              </div>
+            </div>
+          </div>
+        </div>
+      </el-col>
+      <el-col :span="13">
+        <el-row :gutter="20">
+          <el-col :span="10"
+            ><div class="grid-content bg-purple">
+              <h1>JSON信息</h1>
+            </div></el-col
+          >
+          <el-col :span="10"
+            ><div class="grid-content bg-purple">
+              <el-button
+                type="info"
+                icon="el-icon-s-unfold"
+                circle
+                @click="formatResponderJson()"
+              ></el-button>
+              <el-button
+                type="primary"
+                icon="el-icon-edit"
+                circle
+                @click="() => (control.prohibitEdit = !control.prohibitEdit)"
+              ></el-button>
+              <el-button
+                type="success"
+                icon="el-icon-check"
+                circle
+                v-if="!control.prohibitEdit"
+                @click="update()"
+              ></el-button></div
+          ></el-col>
+        </el-row>
+        <el-input
+          type="textarea"
+          autosize
+          rows="26"
+          resize="vertical"
+          placeholder="输入内容"
+          v-model="responderInfoDetail.formatDetailJson"
+          :disabled="control.prohibitEdit"
+        >
+        </el-input>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
 <script>
 import axios from "axios";
 import { host } from "@/request/config";
@@ -149,14 +262,15 @@ export default {
   name: "ResponderDetail",
   data() {
     return {
-      canEdit: true,
+      control: {
+        prohibitEdit: true,
+      },
       id: 0,
-      enableStatus: 0,
-      responderInfo: {
+      responderInfoDetail: {
         name: "",
-        categoryName: "",
         keyUrl: "",
         httpMethod: "",
+        categoryName: "",
         tasks: [
           {
             name: "",
@@ -181,40 +295,18 @@ export default {
             conditions: [],
           },
         ],
+        formatDetailJson:
+          '{"categoryName":null,"httpMethod":null,"keyUrl":null,"name":"新增测试999","results":[],"tasks":[]}',
       },
-      optionalHttpMethods: [
-        {
-          value: "GET",
-          label: "GET",
-        },
-        {
-          value: "POST",
-          label: "POST",
-        },
-        {
-          value: "PUT",
-          label: "PUT",
-        },
-        {
-          value: "DELETE",
-          label: "DELETE",
-        },
-      ],
-      optionalEnableStatuss: [
-        {
-          value: 1,
-          label: "启用",
-        },
-        {
-          value: 0,
-          label: "禁用",
-        },
-      ],
     };
   },
   methods: {
     findResponderInfoDetail() {
       var that = this;
+      that.id = that.$route.params.id;
+      if (that.id <= 0) {
+        return;
+      }
       axios
         .get(host() + "/responder/request/crud/find/" + that.$route.params.id)
         .then((res) => {
@@ -223,11 +315,66 @@ export default {
           }
           if (res.data.code == 200200) {
             console.log(res.data.data.responderInfoDetail);
-            that.responderInfo = res.data.data.responderInfoDetail;
-            that.id = res.data.data.id;
-            that.enableStatus = res.data.data.enableStatus;
+            that.responderInfoDetail = res.data.data;
           }
         });
+    },
+    update() {
+      var that = this;
+      that.control.prohibitEdit = !that.control.prohibitEdit;
+      if (that.id > 0) {
+        // 更新
+        axios
+          .put(
+            host() + "/responder/request/crud/update/" + that.$route.params.id,
+            JSON.parse(that.responderInfoDetail.formatDetailJson)
+          )
+          .then((res) => {
+            if (res.status != 200 || res.data.code != 200200) {
+              alert(res.data.msg);
+            }
+            if (res.data.code == 200200) {
+              that.findResponderInfoDetail();
+            }
+          });
+      } else {
+        // 新增
+        axios
+          .post(
+            host() + "/responder/request/crud/insert",
+            JSON.parse(that.responderInfoDetail.formatDetailJson)
+          )
+          .then((res) => {
+            if (res.status != 200 || res.data.code != 200200) {
+              alert(res.data.msg);
+            }
+            if (res.data.code == 200200) {
+              that.$router.replace(`/responder/detail/${res.data.data}`);
+              that.findResponderInfoDetail();
+            }
+          });
+      }
+    },
+    formatResponderJson() {
+      var that = this;
+      let params = {
+        jsonStr: that.responderInfoDetail.formatDetailJson,
+      };
+      axios
+        .post(host() + "/responder/request/crud/formatJson", params)
+        .then((res) => {
+          if (res.status != 200 || res.data.code != 200200) {
+            alert(res.data.msg);
+          }
+          if (res.data.code == 200200) {
+            that.responderInfoDetail.formatDetailJson = res.data.data;
+          }
+        });
+    },
+  },
+  filters: {
+    jsonFormat(jsonStr) {
+      return JSON.stringify(jsonStr, null, "\t");
     },
   },
   mounted() {
@@ -239,5 +386,15 @@ export default {
 <style scoped>
 .input {
   padding: 0px 10px 20px 10px;
+}
+
+.infoContent {
+  background: rgba(255, 255, 255);
+}
+
+hr {
+  background-color: rgb(242, 243, 245);
+  height: 1px;
+  border: none;
 }
 </style>
