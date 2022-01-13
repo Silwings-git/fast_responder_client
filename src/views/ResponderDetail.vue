@@ -338,8 +338,7 @@ export default {
         });
     },
     update() {
-      var that = this;
-      that.control.prohibitEdit = !that.control.prohibitEdit;
+      var that = this
       var param;
       try{
         param= JSON.parse(that.responderInfoDetail.formatDetailJson)
@@ -360,6 +359,7 @@ export default {
               alert(res.data.msg);
             }
             if (res.data.code == 200200) {
+               that.control.prohibitEdit = !that.control.prohibitEdit;
               that.findResponderInfoDetail();
             }
           });
@@ -376,6 +376,7 @@ export default {
             }
             if (res.data.code == 200200) {
               that.$router.replace(`/responder/detail/${res.data.data}`);
+               that.control.prohibitEdit = !that.control.prohibitEdit;
               that.findResponderInfoDetail();
             }
           });

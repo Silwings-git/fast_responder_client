@@ -96,6 +96,12 @@
             label="启用状态"
             min-width="150"
           >
+            <template slot-scope="scope">
+              <el-switch
+                v-model="scope.row.enableStatus"
+                @change="enableResponderStatus(scope.row)"
+              ></el-switch>
+            </template>
           </el-table-column>
           <el-table-column
             prop="updateTime"
@@ -108,14 +114,9 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
-              <el-button @click="viewDetails(scope.row)" type="text"
+              <el-button class="optButton" @click="viewDetails(scope.row)" type="text"
                 >查看</el-button
               >
-              |
-              <el-button @click="viewDetails(scope.row)" type="text"
-                >启用</el-button
-              >
-              |
               <el-popconfirm
                 confirm-button-text="好的"
                 cancel-button-text="不用了"
@@ -124,7 +125,7 @@
                 title="确定要删除当前应答器吗？"
                 @confirm="deleteResponder(scope.row)"
               >
-                <el-button size="mini" type="danger" slot="reference"
+                <el-button type="text" slot="reference" class="optButton"
                   >删除
                 </el-button>
               </el-popconfirm>
@@ -225,7 +226,6 @@ export default {
       this.$router.push(`/responder/detail/${row.id}`);
     },
     deleteResponder(row) {
-      console.log(row.id);
       var that = this;
       axios
         .delete(
@@ -239,6 +239,23 @@ export default {
           if (res.data.code == 200200) {
             that.query();
           }
+        });
+    },
+    enableResponderStatus(row) {
+      var that = this;
+      let param = {
+        id: row.id,
+        enableStatus: row.enableStatus,
+      };
+      axios
+        .put(host() + "/responder/request/crud/enableConfig", param)
+        .then((res) => {
+          if (res.status != 200 || res.data.code != 200200) {
+            alert(res.data.msg);
+            row.enableStatus = !row.enableStatus;
+            return;
+          }
+          that.query();
         });
     },
   },
@@ -260,6 +277,10 @@ export default {
 
 .input {
   padding: 10px 20px 10px 5px;
+}
+
+.optButton{
+  padding: 12px 5px
 }
 </style>
 <style>
