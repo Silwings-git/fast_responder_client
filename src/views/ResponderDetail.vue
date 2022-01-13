@@ -2,147 +2,106 @@
   <div>
     <el-row>
       <el-col :span="11">
-        <h1>{{ responderInfoDetail.name }}</h1>
-        <div class="infoContent">
-          <h2>基本信息</h2>
-          <hr />
-          <el-row :gutter="20">
-            <el-col :span="10"
-              ><div class="grid-content bg-purple">
-                <span>分类名称: {{ responderInfoDetail.categoryName }}</span>
-              </div></el-col
-            >
-            <el-col :span="10"
-              ><div class="grid-content bg-purple">
-                <span>应答地址: {{ responderInfoDetail.keyUrl }}</span>
-              </div></el-col
-            >
-          </el-row>
-          <br />
-          <el-row :gutter="20">
-            <el-col :span="10"
-              ><div class="grid-content bg-purple">
-                <span>请求方式: {{ responderInfoDetail.httpMethod }}</span>
-              </div></el-col
-            >
-          </el-row>
-          <br />
-        </div>
-        <div class="infoContent">
-          <h2>HTTP 任务</h2>
-          <hr />
-          <div v-for="(task, i) in responderInfoDetail.tasks" :key="i">
-            <h3>任务 {{ i + 1 }}</h3>
-            <div>
-              <el-row :gutter="20">
-                <el-col :span="10"
-                  ><div class="grid-content bg-purple">
-                    <span>任务名称: {{ task.name }}</span>
-                  </div></el-col
-                >
-                <el-col :span="10"
-                  ><div class="grid-content bg-purple">
-                    <span>延迟时间: {{ task.delayTime }} ms</span>
-                  </div></el-col
-                >
-              </el-row>
-            </div>
-            <div>
-              <h4>执行条件</h4>
-              <div v-for="(condition, index) in task.conditions" :key="index">
-                <el-row :gutter="20">
-                  <el-col :span="20"
-                    ><div class="grid-content bg-purple">
-                      <span>条件{{ index + 1 }} : {{ condition }}</span>
-                    </div></el-col
-                  >
-                </el-row>
-              </div>
-            </div>
-            <div>
-              <h4>任务内容</h4>
+        <div v-if="control.showDetail & (id > 0)">
+          <h1>{{ responderInfoDetail.name }}</h1>
+          <div class="infoContent">
+            <h2>基本信息</h2>
+            <hr />
+            <el-row :gutter="20">
+              <el-col :span="10"
+                ><div class="grid-content bg-purple">
+                  <span>分类名称: {{ responderInfoDetail.categoryName }}</span>
+                </div></el-col
+              >
+              <el-col :span="10"
+                ><div class="grid-content bg-purple">
+                  <span>应答地址: {{ responderInfoDetail.keyUrl }}</span>
+                </div></el-col
+              >
+            </el-row>
+            <br />
+            <el-row :gutter="20">
+              <el-col :span="10"
+                ><div class="grid-content bg-purple">
+                  <span>请求方式: {{ responderInfoDetail.httpMethod }}</span>
+                </div></el-col
+              >
+            </el-row>
+            <br />
+          </div>
+          <div class="infoContent">
+            <h2>HTTP 任务</h2>
+            <hr />
+            <div v-for="(task, i) in responderInfoDetail.tasks" :key="i">
+              <h3>任务 {{ i + 1 }}</h3>
               <div>
                 <el-row :gutter="20">
                   <el-col :span="10"
                     ><div class="grid-content bg-purple">
-                      <span>请求方式: {{ task.content.httpMethod }}</span>
+                      <span>任务名称: {{ task.name }}</span>
                     </div></el-col
                   >
                   <el-col :span="10"
                     ><div class="grid-content bg-purple">
-                      <span>请求地址: {{ task.content.requestUrl }} ms</span>
+                      <span>延迟时间: {{ task.delayTime }} ms</span>
                     </div></el-col
                   >
                 </el-row>
               </div>
               <div>
-                <h5>请求头</h5>
-                <el-row :gutter="20">
-                  <el-col :span="6"
-                    ><div class="grid-content bg-purple">序号</div></el-col
-                  >
-                  <el-col :span="7"
-                    ><div class="grid-content bg-purple">
-                      <span>请求头Key</span>
-                    </div></el-col
-                  >
-                  <el-col :span="7"
-                    ><div class="grid-content bg-purple">
-                      <span>请求头Value</span>
-                    </div></el-col
-                  >
-                </el-row>
-                <br />
-                <div
-                  v-for="(value, key, index) in task.content.headers"
-                  :key="index"
-                >
+                <h4>执行条件</h4>
+                <div v-for="(condition, index) in task.conditions" :key="index">
                   <el-row :gutter="20">
-                    <el-col :span="6"
+                    <el-col :span="20"
                       ><div class="grid-content bg-purple">
-                        <span>{{ index + 1 }}</span>
-                      </div></el-col
-                    >
-                    <el-col :span="7"
-                      ><div class="grid-content bg-purple">
-                        <span>{{ key }}</span>
-                      </div></el-col
-                    >
-                    <el-col :span="7"
-                      ><div class="grid-content bg-purple">
-                        <span>{{ value }}</span>
+                        <span>条件{{ index + 1 }} : {{ condition }}</span>
                       </div></el-col
                     >
                   </el-row>
                 </div>
               </div>
               <div>
-                <h5>请求参数</h5>
-                <el-row :gutter="20">
-                  <el-col :span="6"
-                    ><div class="grid-content bg-purple">序号</div></el-col
+                <h4>任务内容</h4>
+                <div>
+                  <el-row :gutter="20">
+                    <el-col :span="10"
+                      ><div class="grid-content bg-purple">
+                        <span>请求方式: {{ task.content.httpMethod }}</span>
+                      </div></el-col
+                    >
+                    <el-col :span="10"
+                      ><div class="grid-content bg-purple">
+                        <span>请求地址: {{ task.content.requestUrl }} ms</span>
+                      </div></el-col
+                    >
+                  </el-row>
+                </div>
+                <div>
+                  <h5>请求头</h5>
+                  <el-row :gutter="20">
+                    <el-col :span="6"
+                      ><div class="grid-content bg-purple">序号</div></el-col
+                    >
+                    <el-col :span="7"
+                      ><div class="grid-content bg-purple">
+                        <span>请求头Key</span>
+                      </div></el-col
+                    >
+                    <el-col :span="7"
+                      ><div class="grid-content bg-purple">
+                        <span>请求头Value</span>
+                      </div></el-col
+                    >
+                  </el-row>
+                  <br />
+                  <div
+                    v-for="(value, key, index) in task.content.headers"
+                    :key="index"
                   >
-                  <el-col :span="7"
-                    ><div class="grid-content bg-purple">
-                      <span>请求参数Key</span>
-                    </div></el-col
-                  >
-                  <el-col :span="7"
-                    ><div class="grid-content bg-purple">
-                      <span>请求参数Value</span>
-                    </div></el-col
-                  >
-                </el-row>
-                <br />
-                <div
-                  v-for="(value, key, index) in task.content.params"
-                  :key="index"
-                >
-                  <div v-for="(item, itemIndex) in value" :key="itemIndex">
                     <el-row :gutter="20">
                       <el-col :span="6"
                         ><div class="grid-content bg-purple">
-                          {{ index + 1 }}.{{ itemIndex + 1 }}
+                          <span>{{ index + 1 }}</span>
                         </div></el-col
                       >
                       <el-col :span="7"
@@ -152,60 +111,112 @@
                       >
                       <el-col :span="7"
                         ><div class="grid-content bg-purple">
-                          <span>{{ item }}</span>
+                          <span>{{ value }}</span>
                         </div></el-col
                       >
                     </el-row>
                   </div>
                 </div>
-              </div>
-              <div>
-                <h5>请求体</h5>
-                <pre>{{ task.content.body | jsonFormat }}</pre>
-                <br />
+                <div>
+                  <h5>请求参数</h5>
+                  <el-row :gutter="20">
+                    <el-col :span="6"
+                      ><div class="grid-content bg-purple">序号</div></el-col
+                    >
+                    <el-col :span="7"
+                      ><div class="grid-content bg-purple">
+                        <span>请求参数Key</span>
+                      </div></el-col
+                    >
+                    <el-col :span="7"
+                      ><div class="grid-content bg-purple">
+                        <span>请求参数Value</span>
+                      </div></el-col
+                    >
+                  </el-row>
+                  <br />
+                  <div
+                    v-for="(value, key, index) in task.content.params"
+                    :key="index"
+                  >
+                    <div v-for="(item, itemIndex) in value" :key="itemIndex">
+                      <el-row :gutter="20">
+                        <el-col :span="6"
+                          ><div class="grid-content bg-purple">
+                            {{ index + 1 }}.{{ itemIndex + 1 }}
+                          </div></el-col
+                        >
+                        <el-col :span="7"
+                          ><div class="grid-content bg-purple">
+                            <span>{{ key }}</span>
+                          </div></el-col
+                        >
+                        <el-col :span="7"
+                          ><div class="grid-content bg-purple">
+                            <span>{{ item }}</span>
+                          </div></el-col
+                        >
+                      </el-row>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h5>请求体</h5>
+                  <pre>{{ task.content.body | jsonFormat }}</pre>
+                  <br />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="infoContent">
-          <h2>响应信息</h2>
-          <hr />
-          <div
-            v-for="(result, index) in responderInfoDetail.results"
-            :key="index"
-          >
-            <h3>响应信息 {{ index + 1 }} : {{ result.resultName }}</h3>
-            <div>
-              <h4>执行条件</h4>
-              <div v-for="(condition, index) in result.conditions" :key="index">
+          <div class="infoContent">
+            <h2>响应信息</h2>
+            <hr />
+            <div
+              v-for="(result, index) in responderInfoDetail.results"
+              :key="index"
+            >
+              <h3>响应信息 {{ index + 1 }} : {{ result.resultName }}</h3>
+              <div>
+                <h4>执行条件</h4>
+                <div
+                  v-for="(condition, index) in result.conditions"
+                  :key="index"
+                >
+                  <el-row :gutter="20">
+                    <el-col :span="20"
+                      ><div class="grid-content bg-purple">
+                        <span>条件{{ index + 1 }} : {{ condition }}</span>
+                      </div></el-col
+                    >
+                  </el-row>
+                </div>
+              </div>
+              <br />
+              <div>
                 <el-row :gutter="20">
-                  <el-col :span="20"
+                  <el-col :span="10"
                     ><div class="grid-content bg-purple">
-                      <span>条件{{ index + 1 }} : {{ condition }}</span>
+                      <span>字符串返回信息 : {{ result.msg }}</span>
                     </div></el-col
                   >
                 </el-row>
               </div>
-            </div>
-            <br />
-            <div>
-              <el-row :gutter="20">
-                <el-col :span="10"
-                  ><div class="grid-content bg-purple">
-                    <span>字符串返回信息 : {{ result.msg }}</span>
-                  </div></el-col
-                >
-              </el-row>
-            </div>
-            <br />
-            <div>
+              <br />
               <div>
-                <h5>响应体</h5>
-                <pre>{{ result.body | jsonFormat }}</pre>
-                <br />
+                <div>
+                  <h5>响应体</h5>
+                  <pre>{{ result.body | jsonFormat }}</pre>
+                  <br />
+                </div>
               </div>
             </div>
           </div>
+        </div>
+        <div v-if="!control.showDetail | (id <= 0)">
+          <iframe
+            src="./ResponderDoc.html"
+            style="width: 100%; height: calc(100vh - 61px); border: 0"
+          ></iframe>
         </div>
       </el-col>
       <el-col :span="13">
@@ -218,7 +229,13 @@
           <el-col :span="10"
             ><div class="grid-content bg-purple">
               <el-button
-                type="info"
+                type="primary"
+                icon="el-icon-document"
+                circle
+                @click="control.showDetail = !control.showDetail"
+              ></el-button>
+              <el-button
+                type="primary"
                 icon="el-icon-s-unfold"
                 circle
                 @click="formatResponderJson()"
@@ -264,6 +281,7 @@ export default {
     return {
       control: {
         prohibitEdit: true,
+        showDetail: true
       },
       id: 0,
       responderInfoDetail: {
@@ -296,7 +314,7 @@ export default {
           },
         ],
         formatDetailJson:
-          '{"categoryName":null,"httpMethod":null,"keyUrl":null,"name":"新增测试999","results":[],"tasks":[]}',
+          '{"categoryName":null,"httpMethod":null,"keyUrl":null,"name":"","results":[],"tasks":[]}',
       },
     };
   },
@@ -322,12 +340,20 @@ export default {
     update() {
       var that = this;
       that.control.prohibitEdit = !that.control.prohibitEdit;
+      var param;
+      try{
+        param= JSON.parse(that.responderInfoDetail.formatDetailJson)
+      }catch(e){
+        alert("JSON格式错误");
+        return
+      }
+       
       if (that.id > 0) {
         // 更新
         axios
           .put(
             host() + "/responder/request/crud/update/" + that.$route.params.id,
-            JSON.parse(that.responderInfoDetail.formatDetailJson)
+            param
           )
           .then((res) => {
             if (res.status != 200 || res.data.code != 200200) {
@@ -342,7 +368,7 @@ export default {
         axios
           .post(
             host() + "/responder/request/crud/insert",
-            JSON.parse(that.responderInfoDetail.formatDetailJson)
+            param
           )
           .then((res) => {
             if (res.status != 200 || res.data.code != 200200) {
@@ -379,6 +405,10 @@ export default {
   },
   mounted() {
     this.findResponderInfoDetail();
+    if(this.id <= 0){
+      // 后端格式化json
+      this.formatResponderJson()
+    }
   },
 };
 </script>

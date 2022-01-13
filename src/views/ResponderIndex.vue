@@ -63,6 +63,12 @@
           </el-option>
         </el-select>
         <el-button type="primary" @click="query()">搜索</el-button>
+        <el-button
+          type="primary"
+          style="width:150px"
+          @click="() => this.$router.push(`/responder/detail/-1`)"
+          >新增</el-button
+        >
       </div>
     </el-header>
     <div class="tableDiv">
@@ -219,7 +225,7 @@ export default {
 }
 
 .input {
-  padding: 45px 20px 10px 5px;
+  padding: 10px 20px 10px 5px;
 }
 </style>
 <style>
