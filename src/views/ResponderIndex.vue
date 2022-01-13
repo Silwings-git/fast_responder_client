@@ -65,7 +65,7 @@
         <el-button type="primary" @click="query()">搜索</el-button>
         <el-button
           type="primary"
-          style="width:150px"
+          style="width: 150px"
           @click="() => this.$router.push(`/responder/detail/-1`)"
           >新增</el-button
         >
@@ -111,6 +111,23 @@
               <el-button @click="viewDetails(scope.row)" type="text"
                 >查看</el-button
               >
+              |
+              <el-button @click="viewDetails(scope.row)" type="text"
+                >启用</el-button
+              >
+              |
+              <el-popconfirm
+                confirm-button-text="好的"
+                cancel-button-text="不用了"
+                icon="el-icon-info"
+                icon-color="red"
+                title="确定要删除当前应答器吗？"
+                @confirm="deleteResponder(scope.row)"
+              >
+                <el-button size="mini" type="danger" slot="reference"
+                  >删除
+                </el-button>
+              </el-popconfirm>
             </template>
           </el-table-column>
         </el-table>
@@ -206,6 +223,23 @@ export default {
     },
     viewDetails(row) {
       this.$router.push(`/responder/detail/${row.id}`);
+    },
+    deleteResponder(row) {
+      console.log(row.id);
+      var that = this;
+      axios
+        .delete(
+          host() + "/responder/request/crud/delete/" + row.id,
+          that.search
+        )
+        .then((res) => {
+          if (res.status != 200 || res.data.code != 200200) {
+            alert(res.data.msg);
+          }
+          if (res.data.code == 200200) {
+            that.query();
+          }
+        });
     },
   },
   mounted: function () {
