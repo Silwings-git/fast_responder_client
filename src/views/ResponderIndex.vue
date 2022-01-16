@@ -7,7 +7,7 @@
           class="input"
           v-model="search.name"
           resize="none"
-          style="width: 200px"
+          style="width: 185px"
           clearable
         >
         </el-input>
@@ -18,7 +18,7 @@
           v-model="search.keyUrl"
           clearable
           resize="none"
-          style="width: 200px"
+          style="width: 185px"
         >
         </el-input>
         应答器分类<el-input
@@ -27,7 +27,7 @@
           v-model="search.categoryName"
           clearable
           resize="none"
-          style="width: 200px"
+          style="width: 185px"
         >
         </el-input>
         请求方式
@@ -36,7 +36,7 @@
           class="input"
           clearable
           placeholder="请选择"
-          style="width: 200px"
+          style="width: 185px"
         >
           <el-option
             v-for="item in optionalHttpMethods"
@@ -52,7 +52,7 @@
           class="input"
           clearable
           placeholder="请选择"
-          style="width: 200px"
+          style="width: 185px"
         >
           <el-option
             v-for="item in optionalEnableStatuss"
@@ -65,11 +65,19 @@
         <el-button type="primary" @click="query()">搜索</el-button>
         <el-button
           type="primary"
-          style="width: 150px"
           @click="() => this.$router.push(`/responder/detail/-1`)"
           >新增</el-button
         >
       </div>
+      <div>
+        <el-button type="primary" plain @click="projectLogs()"
+          >项目实时日志</el-button
+        >
+        <el-button type="primary" plain @click="taskLogs()"
+          >任务实时日志</el-button
+        >
+      </div>
+      <br />
     </el-header>
     <div class="tableDiv">
       <div>
@@ -114,7 +122,10 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
-              <el-button class="optButton" @click="viewDetails(scope.row)" type="text"
+              <el-button
+                class="optButton"
+                @click="viewDetails(scope.row)"
+                type="text"
                 >查看</el-button
               >
               <el-popconfirm
@@ -258,6 +269,12 @@ export default {
           that.query();
         });
     },
+    projectLogs() {
+      window.open(host() + "/responder/logs/all");
+    },
+    taskLogs() {
+      window.open(host() + "/responder/logs/httpTask");
+    },
   },
   mounted: function () {
     this.query();
@@ -279,8 +296,8 @@ export default {
   padding: 10px 20px 10px 5px;
 }
 
-.optButton{
-  padding: 12px 5px
+.optButton {
+  padding: 12px 5px;
 }
 </style>
 <style>

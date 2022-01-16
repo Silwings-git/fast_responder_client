@@ -25,10 +25,6 @@
     .grid {
         width: 100%;
         min-height: 98vh;
-        // background: url("https://silwings-tools.oss-cn-shanghai.aliyuncs.com/icon/001.jpg") no-repeat center top/ 100%;
-        // background: rgb(242, 243, 245) ;
-        // background-size: 100%;
-        // background-repeat: repeat;
     }
 
 </style>

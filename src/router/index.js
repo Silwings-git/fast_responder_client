@@ -6,26 +6,7 @@ Vue.use(VueRouter);
 const routes = [{
         path: "/",
         name: "Home",
-        redirect: '/jsonTools'
-    },
-
-    {
-        path: "/crypto",
-        name: "Crypto",
-        component: () =>
-            import ( /* webpackChunkName: "crypto" */ "../views/Crypto.vue"),
-    },
-    {
-        path: "/annotation",
-        name: "Annotation",
-        component: () =>
-            import ( /* webpackChunkName: "annotation" */ "../views/Annotation.vue"),
-    },
-    {
-        path: "/jsonTools",
-        name: "JsonTools",
-        component: () =>
-            import ( /* webpackChunkName: "jsontools" */ "../views/JsonTools.vue"),
+        redirect: '/responder/index'
     },
     {
         path: "/responder/index",
@@ -39,6 +20,12 @@ const routes = [{
         component: () =>
             import ("../views/ResponderDetail.vue"),
     },
+    {
+        path: "/responder/docs",
+        name: "Docs",
+        component: () =>
+            import ("../views/Docs.vue"),
+    }
 
 ];
 
