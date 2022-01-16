@@ -71,7 +71,7 @@
                     >
                     <el-col :span="10"
                       ><div class="grid-content bg-purple">
-                        <span>请求地址: {{ task.content.requestUrl }} ms</span>
+                        <span>请求地址: {{ task.content.requestUrl }}</span>
                       </div></el-col
                     >
                   </el-row>
