@@ -8,7 +8,6 @@
           v-model="search.name"
           resize="none"
           style="width: 185px"
-          clearable
         >
         </el-input>
 
@@ -16,7 +15,6 @@
           placeholder="请输入"
           class="input"
           v-model="search.keyUrl"
-          clearable
           resize="none"
           style="width: 185px"
         >
@@ -25,7 +23,6 @@
           placeholder="请输入"
           class="input"
           v-model="search.categoryName"
-          clearable
           resize="none"
           style="width: 185px"
         >
@@ -298,15 +295,5 @@ export default {
 
 .optButton {
   padding: 12px 5px;
-}
-</style>
-<style>
-.el-input__suffix {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  right: 33px;
-  top: 50%;
-  margin-top: -4px;
 }
 </style>
