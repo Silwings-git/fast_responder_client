@@ -26,6 +26,11 @@
                   <span>请求方式: {{ responderInfoDetail.httpMethod }}</span>
                 </div></el-col
               >
+              <el-col :span="10"
+                ><div class="grid-content bg-purple">
+                  <span>响应延迟时间: {{ responderInfoDetail.delayTime }} ms</span>
+                </div></el-col
+              >
             </el-row>
             <br />
           </div>
