@@ -1,5 +1,7 @@
 # fast_responder_client
 
+可通过src\request\config.js修改请求域名
+
 ## Project setup
 ```
 yarn install
